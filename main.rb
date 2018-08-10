@@ -10,7 +10,7 @@ require './const'
 require './weekly_report'
 # include('user.rb')
 
-ACTION_MSG_weekly_report = "週報"
+ACTION_MSG_WEEKLY_REPORT = "週報"
 ACTION_MSG_HELLO = "こんにちは"
 
 
@@ -56,7 +56,7 @@ EM.run do
   # 接続が切断した時の処理
   ws.on :close do
     p [:close, event.code]
-    # ws = nil
+    ws = nil
     EM.stop
   end
 
