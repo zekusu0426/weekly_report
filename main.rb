@@ -34,10 +34,13 @@ EM.run do
   # RTM APIから情報を受け取った時の処理
   ws.on :message do |event|
   	data = JSON.parse(event.data)
+
     p [:message, data]
     ######## ↓ロジック↓ ########
     send_text = ''
-    send_text = convert_to_weekly_report(data['text']) unless data['text'] == nil
+
+    # 習慣報告書という文字列がなければ無視
+    send_text = convert_to_weekly_report(data['text']) if data['text'] != nil and data['text'] =~ /週[\s　]?間[\s　]?報[\s　]?告[\s　]?書/
 
     # send_text = ""
     # send_text = TEMPLATE_STR_weekly_report if data['text'] != nil and data['text'].include?(ACTION_MSG_weekly_report)
